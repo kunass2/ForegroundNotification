@@ -8,5 +8,4 @@ end
 target 'BSForegroundNotification_Tests', :exclusive => true do
   pod "BSForegroundNotification", :path => "../"
 
-  pod 'FBSnapshotTestCase'
 end

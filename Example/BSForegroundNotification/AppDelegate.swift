@@ -2,45 +2,66 @@
 //  AppDelegate.swift
 //  BSForegroundNotification
 //
-//  Created by Bartłomiej Semańczyk on 09/30/2015.
-//  Copyright (c) 2015 Bartłomiej Semańczyk. All rights reserved.
+//  Created by Bartłomiej Semańczyk on 26/09/15.
+//  Copyright © 2015 Bartłomiej Semańczyk. All rights reserved.
 //
 
 import UIKit
+import BSForegroundNotification
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        registerNotifications()
+        
         return true
     }
-
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("new thing received")
     }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    private func registerNotifications() {
+        
+        let firstAction = UIMutableUserNotificationAction()
+        firstAction.identifier = "first"
+        firstAction.title = "FIRST"
+        
+        let secondAction = UIMutableUserNotificationAction()
+        secondAction.identifier = "second"
+        secondAction.title = "SECOND"
+        
+        let thirdAction = UIMutableUserNotificationAction()
+        thirdAction.identifier = "third"
+        thirdAction.title = "THIRD"
+        
+        let responseTextAction = UIMutableUserNotificationAction()
+        responseTextAction.identifier = "text"
+        responseTextAction.title = "New text"
+        
+        if #available(iOS 9.0, *) {
+            responseTextAction.behavior = UIUserNotificationActionBehavior.TextInput
+        }
+        
+        let twoButtonsCategory = UIMutableUserNotificationCategory()
+        twoButtonsCategory.identifier = "TWO_BUTTONS"
+        twoButtonsCategory.setActions([firstAction, responseTextAction], forContext: .Default)
+        
+        let textFieldCategory = UIMutableUserNotificationCategory()
+        textFieldCategory.setActions([responseTextAction], forContext: .Default)
+        textFieldCategory.identifier = "TEXT_FIELD"
+        
+        let oneButtonCategory = UIMutableUserNotificationCategory()
+        oneButtonCategory.setActions([firstAction], forContext: .Default)
+        oneButtonCategory.identifier = "ONE_BUTTON"
+        
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound, .Badge], categories: [twoButtonsCategory, oneButtonCategory, textFieldCategory])
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
     }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
 }
 

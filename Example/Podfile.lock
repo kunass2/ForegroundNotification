@@ -1,0 +1,14 @@
+PODS:
+  - BSForegroundNotification (0.1.0)
+
+DEPENDENCIES:
+  - BSForegroundNotification (from `../`)
+
+EXTERNAL SOURCES:
+  BSForegroundNotification:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BSForegroundNotification: ef5dea0a2b0366a39f4fef603a686b1679c84631
+
+COCOAPODS: 0.38.2
