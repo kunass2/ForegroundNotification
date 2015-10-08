@@ -61,7 +61,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
             "category": category,
             "alert": [
                 "body": "Hello this is a big body, you can do this if you want. A very nice notification sis for you since now. available on GIthub for free. Is not this beautiful?:-)",
-                "title": "My first title"
+                "title": "Super notification title"
             ],
             "sound": "anysound"
             ]

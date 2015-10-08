@@ -89,8 +89,8 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         self.userInfo = userInfo
         
         if let payload = userInfo["aps"] as? NSDictionary {
-            titleLabel.text = payload["alert"]?["title"] as? String
-            subtitleLabel.text = payload["alert"]?["body"] as? String
+            titleLabel.text = payload["alert"]?["title"] as? String ?? ""
+            subtitleLabel.text = payload["alert"]?["body"] as? String ?? ""
             categoryIdentifier = payload["category"] as? String
             sound = payload["sound"] as? String
         }
@@ -102,8 +102,8 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         
         self.localNotification = localNotification
         
-        titleLabel.text = localNotification.alertTitle
-        subtitleLabel.text = localNotification.alertBody
+        titleLabel.text = localNotification.alertTitle ?? ""
+        subtitleLabel.text = localNotification.alertBody ?? ""
         categoryIdentifier = localNotification.category
         sound = localNotification.soundName
     }
@@ -146,7 +146,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
     
     public func presentNotification() {
 
-        if let window = UIApplication.sharedApplication().keyWindow {
+        if let window = UIApplication.sharedApplication().keyWindow where !titleLabel.text!.isEmpty && !subtitleLabel.text!.isEmpty {
             
             window.windowLevel = UIWindowLevelStatusBar
             window.addSubview(self)
