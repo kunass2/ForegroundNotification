@@ -246,11 +246,15 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             
         case .Ended, .Cancelled, .Failed:
             
+            print(previousPanStatus)
             if previousPanStatus == .Up {
+                print("dismissed")
                 dismissView()
             } else if previousPanStatus == .Pull {
+                print("pulled")
                 presentView()
             } else {
+                print("topped")
                 moveViewToTop()
             }
             
@@ -357,11 +361,12 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .BeginFromCurrentState, animations: {
             
             self.topConstraintNotification.constant = -self.heightConstraintNotification.constant
-            UIApplication.sharedApplication().delegate?.window??.windowLevel = UIWindowLevelNormal
             self.layoutIfNeeded()
             
             }, completion: { finished in
+                
                 self.removeFromSuperview()
+                UIApplication.sharedApplication().delegate?.window??.windowLevel = UIWindowLevelNormal
         })
     }
     
@@ -608,8 +613,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             self.layoutIfNeeded()
             
             if self.shouldShowTextView {
-                self.textView.alpha = 1
-                self.sendButton.alpha = 1
+                self.presentTextField()
             }
             
             }, completion: nil)
