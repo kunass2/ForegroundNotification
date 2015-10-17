@@ -37,6 +37,8 @@ within **bridging header** file and avoid to import framework for every needed f
 ##Info
 
 - entirely written in latest Swift syntax. Works with iOS 8 and 9 and Xcode7.
+- to present local foreground notification, both `alertTitle` and `alertBody` cannot be nil
+- to present remote foreground notification, both `title` and `body` cannot be nil in `alert` dictionary. In case when `alert` is a string, that string cannot be empty.
 
 ##Usage
 
