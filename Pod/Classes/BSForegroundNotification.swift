@@ -90,8 +90,8 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         
         if let payload = userInfo["aps"] as? NSDictionary {
 
-            if let summary = payload["alert"] as? String {
-                titleLabel.text = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String
+            if let alertTitle = payload["alert"] as? String {
+                titleLabel.text = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String
                 subtitleLabel.text = summary
             } else {
                 titleLabel.text = payload["alert"]?["title"] as? String ?? ""
