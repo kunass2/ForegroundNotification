@@ -84,6 +84,12 @@ func application(application: UIApplication, handleActionWithIdentifier identifi
 func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void)
 ```
 
+######Class properties:
+
+You can set your own sound using `systemSoundID` class property:
+
+```BSForegroundNotification.systemSoundID = 1002 //1001 is by default```
+
 ## Author
 
 Bartłomiej Semańczyk, bartekss2@icloud.com

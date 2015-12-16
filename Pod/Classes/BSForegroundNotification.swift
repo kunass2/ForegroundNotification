@@ -24,6 +24,8 @@ import AVFoundation
 
 public class BSForegroundNotification: UIView, UITextViewDelegate {
     
+    public static var systemSoundID: SystemSoundID = 1001
+    
     public weak var delegate: BSForegroundNotificationDelegate?
     
     private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
@@ -181,7 +183,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             }
             
             if let _ = sound {
-                AudioServicesPlaySystemSound(1002)
+                AudioServicesPlaySystemSound(BSForegroundNotification.systemSoundID)
             }
             
             timerToDismissNotification = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: Selector("dismissView"), userInfo: nil, repeats: false)
