@@ -182,8 +182,19 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
                 self.layoutIfNeeded()
             }
             
-            if let _ = sound {
-                AudioServicesPlaySystemSound(BSForegroundNotification.systemSoundID)
+            if let soundName = sound {
+                
+                let componentsFromSoundName = soundName.componentsSeparatedByString(".")
+                
+                if let soundTitle = componentsFromSoundName.first, let soundExtension = componentsFromSoundName.last, let soundPath = NSBundle.mainBundle().pathForResource(soundTitle, ofType: soundExtension) {
+                    
+                    var soundID: SystemSoundID = 0
+                    AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: soundPath) , &soundID)
+                    AudioServicesPlaySystemSound(soundID)
+        
+                } else {
+                    AudioServicesPlaySystemSound(BSForegroundNotification.systemSoundID)
+                }
             }
             
             timerToDismissNotification = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: Selector("dismissView"), userInfo: nil, repeats: false)
