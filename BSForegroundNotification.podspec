@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BSForegroundNotification"
-  s.version          = "0.2"
+  s.version          = "0.3"
   s.summary          = "Present your custom iOS 8 and iOS 9 notification alert when app is in foreground mode."
 
 # This description is used to generate tags and improve search results.

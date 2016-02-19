@@ -27,7 +27,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
     public static var systemSoundID: SystemSoundID = 1001
     
     public weak var delegate: BSForegroundNotificationDelegate?
-    
+    public var timeToDismissNotification = NSTimeInterval(4)
     private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
     private let vibrancyEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark)))
     
@@ -197,7 +197,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
                 }
             }
             
-            timerToDismissNotification = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: Selector("dismissView"), userInfo: nil, repeats: false)
+            timerToDismissNotification = NSTimer.scheduledTimerWithTimeInterval(timeToDismissNotification, target: self, selector: Selector("dismissView"), userInfo: nil, repeats: false)
         }
     }
     
