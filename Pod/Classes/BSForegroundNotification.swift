@@ -376,7 +376,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         dismissView()
     }
     
-    func dismissView() {
+    public func dismissView() {
         
         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .BeginFromCurrentState, animations: {
             
