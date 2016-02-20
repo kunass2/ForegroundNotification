@@ -50,6 +50,12 @@ let notification = BSForegroundNotification(localNotification: localNotification
 let notification = BSForegroundNotification(titleLabel: "title", subtitleLabel: "subtitle", categoryIdentifier: "category") //custom initializer
 ```
 
+######Set a default dismissal time for the notification:
+
+```Swift
+notification.timeToDismissNotification = NSTimeInterval(10)
+```
+
 ######Set delegate which conform to protocol `BSForegroundNotificationDelegate`:
 
 Note that `BSForegroundNotificationDelegate` inherits from `UIApplicationsDelegate`
