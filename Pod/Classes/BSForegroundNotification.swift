@@ -111,7 +111,12 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         
         self.localNotification = localNotification
         
-        titleLabel.text = localNotification.alertTitle ?? ""
+        if #available(iOS 8.2, *) {
+          titleLabel.text = localNotification.alertTitle ?? ""
+        } else {
+          // Fallback on earlier versions
+          titleLabel.text = ""
+        }
         subtitleLabel.text = localNotification.alertBody ?? ""
         categoryIdentifier = localNotification.category
         sound = localNotification.soundName
