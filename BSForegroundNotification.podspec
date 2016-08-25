@@ -8,14 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = "BSForegroundNotification"
-  s.version          = "0.3.1"
+  s.version          = "0.9.2"
   s.summary          = "Present your custom iOS 8 and iOS 9 notification alert when app is in foreground mode."
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = "If you need present notification that looks like a native notifaction in iOS 8 or 9 with custom actions including textfield while app is in foreground mode... this framework is for you:-) Simple and straightforward in use."
 
   s.homepage         = "https://github.com/kunass2/BSForegroundNotification"
@@ -25,11 +19,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
-
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'BSForegroundNotification' => ['Pod/Assets/*.png']
-  }
-
   s.frameworks = 'UIKit', 'AVFoundation'
+
 end

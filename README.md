@@ -2,6 +2,7 @@
 
 ![Notification with text field action](Assets/1.png)
 ![Notification with button actions](Assets/2.png)
+![Notification with button actions](Assets/3.png)
 ![Notification without actions](Assets/4.png)
 
 ## Usage
@@ -53,7 +54,7 @@ let notification = BSForegroundNotification(titleLabel: "title", subtitleLabel: 
 ######Set a default dismissal time for the notification:
 
 ```Swift
-notification.timeToDismissNotification = NSTimeInterval(10)
+notification.timeToDismissNotification = 10 //4 is by default
 ```
 
 ######Set delegate which conform to protocol `BSForegroundNotificationDelegate`:

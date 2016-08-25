@@ -17,6 +17,8 @@
 		A78D09F314F9D4168C81B9F36748F705 /* Pods-BSForegroundNotification_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EA35630D8529775C63D2435251998D9 /* Pods-BSForegroundNotification_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7B0A74DCA636A41BC3483403C1E1C91 /* BSForegroundNotification-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 32EDCEAE3B949287054B2888F3DECA81 /* BSForegroundNotification-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABDC25E4BEFD77CA0C852BEB057E7581 /* Pods-BSForegroundNotification_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FA9C871832B2A9BCFBF722A7CFB0CA /* Pods-BSForegroundNotification_Example-dummy.m */; };
+		BC4D018F1D7042320037563B /* BSForegroundNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4D018E1D7042320037563B /* BSForegroundNotificationView.xib */; };
+		BC4D01911D70437C0037563B /* BSForegroundNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01901D70437C0037563B /* BSForegroundNotificationView.swift */; };
 		C05694F6B776F3B0B94DF97CD97EE8E7 /* BSForegroundNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C61A3C68B33BCFFAFC905055D5C13 /* BSForegroundNotification.swift */; };
 		F0850B8131F04D7ADC0CA31053C35274 /* Pods-BSForegroundNotification_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B47D201536FD664DD652F806845E049 /* Pods-BSForegroundNotification_Tests-dummy.m */; };
 		F58E7D3F656228037034059EF4078927 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F866EA2B7D47D920CF64B0E05B695896 /* Foundation.framework */; };
@@ -73,6 +75,8 @@
 		AD25D28CF1A42EA432250F3DBF113A19 /* Pods-BSForegroundNotification_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BSForegroundNotification_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		B2AB2D6FB7D4EA9B600B71D2AEB606B0 /* Pods-BSForegroundNotification_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BSForegroundNotification_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BC4D018E1D7042320037563B /* BSForegroundNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BSForegroundNotificationView.xib; sourceTree = "<group>"; };
+		BC4D01901D70437C0037563B /* BSForegroundNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSForegroundNotificationView.swift; sourceTree = "<group>"; };
 		BD2690684CECA094B58A8181085B5D78 /* Pods-BSForegroundNotification_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BSForegroundNotification_Tests.modulemap"; sourceTree = "<group>"; };
 		C0F57CF6170B310A1B2DACF76B2148EA /* Pods-BSForegroundNotification_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BSForegroundNotification_Example-resources.sh"; sourceTree = "<group>"; };
 		D480065FA77C92369FB7B910FD00AD71 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				7C3C61A3C68B33BCFFAFC905055D5C13 /* BSForegroundNotification.swift */,
+				BC4D018E1D7042320037563B /* BSForegroundNotificationView.xib */,
+				BC4D01901D70437C0037563B /* BSForegroundNotificationView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC4D018F1D7042320037563B /* BSForegroundNotificationView.xib in Resources */,
 				6852ED554F4CEDE6802C78C52C89C2AC /* BSForegroundNotification.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +417,7 @@
 			files = (
 				2A6307151085DAA9E67DBC8319F6AC2A /* BSForegroundNotification-dummy.m in Sources */,
 				C05694F6B776F3B0B94DF97CD97EE8E7 /* BSForegroundNotification.swift in Sources */,
+				BC4D01911D70437C0037563B /* BSForegroundNotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
