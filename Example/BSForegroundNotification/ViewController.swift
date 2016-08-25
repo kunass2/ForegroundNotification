@@ -24,6 +24,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     @IBAction func notificationWithTextFieldTapped(sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory("TEXT_FIELD"))
+        
         BSForegroundNotification.systemSoundID = 1000
         notification.presentNotification()
         notification.delegate = self
@@ -32,6 +33,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     @IBAction func notificationWithTwoButtonsTapped(sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory("TWO_BUTTONS"))
+        
         BSForegroundNotification.systemSoundID = 1001
         notification.presentNotification()
         notification.delegate = self
@@ -40,6 +42,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     @IBAction func notificationWithOneButtonTapped(sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
+        
         BSForegroundNotification.systemSoundID = 1003
         notification.presentNotification()
         notification.delegate = self
@@ -48,6 +51,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     @IBAction func notificationWithoutActionsTapped(sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory(""))
+        
         BSForegroundNotification.systemSoundID = 1004
         notification.presentNotification()
         notification.delegate = self

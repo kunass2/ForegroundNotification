@@ -1,0 +1,6 @@
+framework module Pods_BSForegroundNotification_Example {
+  umbrella header "Pods-BSForegroundNotification_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

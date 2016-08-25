@@ -13,6 +13,7 @@
 }
 
 enum BSPanStatus {
+    
     case Up
     case Down
     case Pull
@@ -25,9 +26,9 @@ import AVFoundation
 public class BSForegroundNotification: UIView, UITextViewDelegate {
     
     public static var systemSoundID: SystemSoundID = 1001
-    
     public weak var delegate: BSForegroundNotificationDelegate?
-    public var timeToDismissNotification = NSTimeInterval(4)
+    public var timeToDismissNotification = 4
+    
     private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
     private let vibrancyEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark)))
     
@@ -45,7 +46,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
     private var localNotification: UILocalNotification?
     
     private var categoryIdentifier: String?
-    private var sound: String?
+    private var soundName: String?
     
     private var tapGestureRecognizer: UITapGestureRecognizer!
     private var panGestureRecognizer: UIPanGestureRecognizer!
@@ -65,12 +66,14 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
     private var timerToDismissNotification: NSTimer?
     
     private var maxHeightOfNotification: CGFloat {
+        
         get {
             return heightForText(subtitleLabel.text ?? "", width: subtitleLabel.frame.size.width) + 65 + (heightConstraintTextView?.constant ?? 0)
         }
     }
     
     private var shouldShowTextView: Bool {
+        
         get {
             if #available(iOS 9.0, *) {
                 return leftUserNotificationAction == nil && rightUserNotificationAction?.behavior == .TextInput
@@ -93,15 +96,18 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         if let payload = userInfo["aps"] as? NSDictionary {
 
             if let alertTitle = payload["alert"] as? String {
+                
                 titleLabel.text = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String
                 subtitleLabel.text = alertTitle
+                
             } else {
+                
                 titleLabel.text = payload["alert"]?["title"] as? String ?? ""
                 subtitleLabel.text = payload["alert"]?["body"] as? String ?? ""
             }
             
             categoryIdentifier = payload["category"] as? String
-            sound = payload["sound"] as? String
+            soundName = payload["sound"] as? String
         }
     }
     
@@ -112,14 +118,17 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         self.localNotification = localNotification
         
         if #available(iOS 8.2, *) {
+            
           titleLabel.text = localNotification.alertTitle ?? ""
+            
         } else {
-          // Fallback on earlier versions
+            
           titleLabel.text = ""
         }
+        
         subtitleLabel.text = localNotification.alertBody ?? ""
         categoryIdentifier = localNotification.category
-        sound = localNotification.soundName
+        soundName = localNotification.soundName
     }
     
     public convenience init(titleLabel: String?, subtitleLabel: String?, categoryIdentifier: String?, soundName: String?, userInfo: [NSObject: AnyObject]?, localNotification: UILocalNotification?) {
@@ -129,7 +138,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         self.titleLabel.text = titleLabel
         self.subtitleLabel.text = subtitleLabel
         self.categoryIdentifier = categoryIdentifier
-        self.sound = soundName
+        self.soundName = soundName
         
         self.userInfo = userInfo
         self.localNotification = localNotification
@@ -183,17 +192,19 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             setupActions()
             
             UIView.animateWithDuration(0.5) {
+                
                 self.topConstraintNotification.constant = 0
                 self.layoutIfNeeded()
             }
             
-            if let soundName = sound {
+            if let soundName = soundName {
                 
                 let componentsFromSoundName = soundName.componentsSeparatedByString(".")
                 
                 if let soundTitle = componentsFromSoundName.first, let soundExtension = componentsFromSoundName.last, let soundPath = NSBundle.mainBundle().pathForResource(soundTitle, ofType: soundExtension) {
                     
                     var soundID: SystemSoundID = 0
+                    
                     AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: soundPath) , &soundID)
                     AudioServicesPlaySystemSound(soundID)
         
@@ -202,8 +213,22 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
                 }
             }
             
-            timerToDismissNotification = NSTimer.scheduledTimerWithTimeInterval(timeToDismissNotification, target: self, selector: Selector("dismissView"), userInfo: nil, repeats: false)
+            timerToDismissNotification = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(timeToDismissNotification), target: self, selector: Selector("dismissView"), userInfo: nil, repeats: false)
         }
+    }
+    
+    public func dismissView() {
+        
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .BeginFromCurrentState, animations: {
+            
+            self.topConstraintNotification.constant = -self.heightConstraintNotification.constant
+            self.layoutIfNeeded()
+            
+            }, completion: { finished in
+                
+                self.removeFromSuperview()
+                UIApplication.sharedApplication().delegate?.window??.windowLevel = UIWindowLevelNormal
+        })
     }
     
     //MARK: - Internal
@@ -225,13 +250,14 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         timerToDismissNotification = nil
         
         let panLocation = panGestureRecognizer.locationInView(superview)
-        
         let velocity = panGestureRecognizer.velocityInView(self)
         
         switch panGestureRecognizer.state {
             
         case .Began:
+            
             initialPanLocation = panLocation
+            
         case .Changed:
             
             topConstraintNotification.constant =  min(-(initialPanLocation.y - panLocation.y), 0)
@@ -251,6 +277,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
                     rightActionButton.alpha = alpha
                     
                     if shouldShowTextView {
+                        
                         textView.alpha = alpha
                         sendButton.alpha = alpha
                     }
@@ -271,15 +298,16 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             
         case .Ended, .Cancelled, .Failed:
             
-            print(previousPanStatus)
             if previousPanStatus == .Up {
-                print("dismissed")
+                
                 dismissView()
+                
             } else if previousPanStatus == .Pull {
-                print("pulled")
+                
                 presentView()
+                
             } else {
-                print("topped")
+                
                 moveViewToTop()
             }
             
@@ -299,12 +327,17 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         panGestureRecognizer.enabled = true
         
         if #available(iOS 9.0, *) {
+            
             if let behavior = leftUserNotificationAction?.behavior where behavior == .TextInput {
+                
                 currentUserNotificationTextFieldAction = leftUserNotificationAction
                 presentTextField()
+                
             } else {
+                
                 readyToDismiss = true
             }
+            
         } else {
             readyToDismiss = true
         }
@@ -312,10 +345,14 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         if readyToDismiss {
             
             if let userInfo = userInfo {
+                
                 delegate?.application?(UIApplication.sharedApplication(), handleActionWithIdentifier: leftUserNotificationAction?.identifier ?? "", forRemoteNotification: userInfo, completionHandler: {})
+                
             } else if let localNotification = localNotification {
+                
                 delegate?.application?(UIApplication.sharedApplication(), handleActionWithIdentifier: leftUserNotificationAction?.identifier ?? "", forLocalNotification: localNotification, completionHandler: {})
             }
+            
             dismissView()
         }
     }
@@ -328,25 +365,31 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         panGestureRecognizer.enabled = true
         
         if #available(iOS 9.0, *) {
+            
             if let behavior = rightUserNotificationAction?.behavior where behavior == .TextInput {
                 
                 currentUserNotificationTextFieldAction = rightUserNotificationAction
                 presentTextField()
+                
             } else {
                 readyToDismiss = true
             }
+            
         } else {
             readyToDismiss = true
         }
         
         if readyToDismiss {
             
-            
             if let userInfo = userInfo {
+                
                 delegate?.application?(UIApplication.sharedApplication(), handleActionWithIdentifier: rightUserNotificationAction?.identifier ?? "", forRemoteNotification: userInfo, completionHandler: {})
+                
             } else if let localNotification = localNotification {
+                
                 delegate?.application?(UIApplication.sharedApplication(), handleActionWithIdentifier: rightUserNotificationAction?.identifier ?? "", forLocalNotification: localNotification, completionHandler: {})
             }
+            
             dismissView()
         }
     }
@@ -372,27 +415,15 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             if #available(iOS 9.0, *) {
                 delegate?.application?(UIApplication.sharedApplication(), handleActionWithIdentifier: currentUserNotificationTextFieldAction?.identifier ?? "", forRemoteNotification: userInfo, withResponseInfo: [UIUserNotificationActionResponseTypedTextKey: textView.text], completionHandler: {})
             }
+            
         } else if let localNotification = localNotification {
 
             if #available(iOS 9.0, *) {
                 delegate?.application?(UIApplication.sharedApplication(), handleActionWithIdentifier: currentUserNotificationTextFieldAction?.identifier ?? "", forLocalNotification: localNotification, withResponseInfo: [UIUserNotificationActionResponseTypedTextKey: textView.text], completionHandler: {})
             }
         }
-        dismissView()
-    }
-    
-    public func dismissView() {
         
-        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .BeginFromCurrentState, animations: {
-            
-            self.topConstraintNotification.constant = -self.heightConstraintNotification.constant
-            self.layoutIfNeeded()
-            
-            }, completion: { finished in
-                
-                self.removeFromSuperview()
-                UIApplication.sharedApplication().delegate?.window??.windowLevel = UIWindowLevelNormal
-        })
+        dismissView()
     }
     
     //MARK: - Private
@@ -482,7 +513,6 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         let leadingConstraintSeparatorView = NSLayoutConstraint(item: separatorView, attribute: .Leading, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Leading, multiplier: 1, constant: 0)
         let trailingConstraintSeparatorView = NSLayoutConstraint(item: separatorView, attribute: .Trailing, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Trailing, multiplier: 1, constant: 0)
         
-        
         vibrancyEffectView.contentView.addSubview(separatorView)
         separatorView.addConstraint(heightConstraintSeparatorView)
         vibrancyEffectView.addConstraints([topConstraintSeparatorView, leadingConstraintSeparatorView, trailingConstraintSeparatorView])
@@ -547,7 +577,6 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
         rightActionButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         textView.translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
     private func setupActions() {
@@ -565,29 +594,23 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             let leadingConstraintTextView = NSLayoutConstraint(item: textView, attribute: .Leading, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Leading, multiplier: 1, constant: 20)
             let topConstraintTextView = NSLayoutConstraint(item: textView, attribute: .Top, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Top, multiplier: 1, constant: 10)
             
-            let heightConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: 30)
-            let widthConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1, constant: 40)
-            let trailingConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Trailing, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Trailing, multiplier: 1, constant: -20)
-            let bottomEdgeSendButton = NSLayoutConstraint(item: sendButton, attribute: .Bottom, relatedBy: .Equal, toItem: textView, attribute: .Bottom, multiplier: 1, constant: 0)
-            let leadingConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Leading, relatedBy: .Equal, toItem: textView, attribute: .Trailing, multiplier: 1, constant: 20)
+            let topConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Top, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Top, multiplier: 1, constant: 0)
+            let bottomConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Bottom, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Bottom, multiplier: 1, constant: 0)
+            let widthConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1, constant: 80)
+            let trailingConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Trailing, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Trailing, multiplier: 1, constant: 0)
+            let leadingConstraintSendButton = NSLayoutConstraint(item: sendButton, attribute: .Leading, relatedBy: .Equal, toItem: textView, attribute: .Trailing, multiplier: 1, constant: 0)
             
             vibrancyEffectView.contentView.addSubview(textView)
             vibrancyEffectView.contentView.addSubview(sendButton)
             
             textView.addConstraint(heightConstraintTextView!)
-            sendButton.addConstraints([heightConstraintSendButton, widthConstraintSendButton])
-            vibrancyEffectView.addConstraints([leadingConstraintTextView, topConstraintTextView, trailingConstraintSendButton, bottomEdgeSendButton, leadingConstraintSendButton])
+            sendButton.addConstraints([widthConstraintSendButton])
+            vibrancyEffectView.addConstraints([leadingConstraintTextView, topConstraintTextView, trailingConstraintSendButton, leadingConstraintSendButton, bottomConstraintSendButton, topConstraintSendButton])
             
             let topConstraintRightButton = NSLayoutConstraint(item: rightActionButton, attribute: .Top, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Top, multiplier: 1, constant: 10)
             let trailingConstraintRightButton = NSLayoutConstraint(item: rightActionButton, attribute: .Trailing, relatedBy: .Equal, toItem: vibrancyEffectView, attribute: .Trailing, multiplier: 1, constant: -20)
             let heightConstraintRightButton = NSLayoutConstraint(item: rightActionButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: 30)
-            let leadingConstraintRightButton = NSLayoutConstraint(item: rightActionButton,
-                attribute: .Leading,
-                relatedBy: .Equal,
-                toItem: leftUserNotificationAction != nil ? leftActionButton : vibrancyEffectView,
-                attribute: leftUserNotificationAction != nil ? .Trailing : .Leading,
-                multiplier: 1,
-                constant: 20)
+            let leadingConstraintRightButton = NSLayoutConstraint(item: rightActionButton, attribute: .Leading, relatedBy: .Equal, toItem: leftUserNotificationAction != nil ? leftActionButton : vibrancyEffectView, attribute: leftUserNotificationAction != nil ? .Trailing : .Leading, multiplier: 1, constant: 20)
             
             if !shouldShowTextView {
                 
@@ -613,7 +636,6 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             }
             
             if shouldShowTextView {
-                
                 currentUserNotificationTextFieldAction = rightUserNotificationAction
             }
             
@@ -650,6 +672,7 @@ public class BSForegroundNotification: UIView, UITextViewDelegate {
             
             self.topConstraintNotification.constant = 0
             self.layoutIfNeeded()
+            
             }, completion: nil)
     }
     
