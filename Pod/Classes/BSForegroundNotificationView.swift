@@ -83,11 +83,11 @@ class BSForegroundNotificationView: UIView, UITextViewDelegate {
     var categoryIdentifier: String?
     var soundName: String?
     
-    var userInfo: [NSObject: AnyObject]? {
+    var userInfo: [AnyHashable: Any]? {
         
         didSet {
             
-            if let payload = (userInfo as? [String: AnyObject])?["aps"] as? [String: AnyObject] {
+            if let payload = userInfo?["aps"] as? [AnyHashable: Any] {
                 
                 if let alertTitle = payload["alert"] as? String {
                     
@@ -96,8 +96,8 @@ class BSForegroundNotificationView: UIView, UITextViewDelegate {
                     
                 } else {
                     
-                    titleLabel.text = (payload["alert"] as? [String: AnyObject])?["title"] as? String ?? ""
-                    subtitleLabel.text = (payload["alert"] as? [String: AnyObject])?["body"] as? String ?? ""
+                    titleLabel.text = (payload["alert"] as? [AnyHashable: Any])?["title"] as? String ?? ""
+                    subtitleLabel.text = (payload["alert"] as? [AnyHashable: Any])?["body"] as? String ?? ""
                 }
                 
                 categoryIdentifier = payload["category"] as? String
@@ -209,11 +209,11 @@ class BSForegroundNotificationView: UIView, UITextViewDelegate {
         
         if let userInfo = userInfo {
             
-            delegate?.foregroundRemoteNotificationWasTouched?(userInfo: userInfo as [NSObject : AnyObject])
+            delegate?.foregroundRemoteNotificationWasTouched?(with: userInfo)
             
         } else if let localNotification = localNotification {
             
-            delegate?.foregroundLocalNotificationWasTouched?(localNotifcation: localNotification)
+            delegate?.foregroundLocalNotificationWasTouched?(with: localNotification)
         }
         
         dismissNotification()

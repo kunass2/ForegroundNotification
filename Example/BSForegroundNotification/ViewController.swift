@@ -53,8 +53,8 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
         let notification = BSForegroundNotification(userInfo: userInfoForCategory(""))
         
         BSForegroundNotification.systemSoundID = 1004
-        notification.presentNotification()
         notification.delegate = self
+        notification.presentNotification()
     }
     
     //MARK: - Public
@@ -80,7 +80,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     
     //MARK: - BSForegroundNotificationDelegate
     
-    func foregroundRemoteNotificationWasTouched(userInfo: [NSObject: AnyObject]) {
+    func foregroundRemoteNotificationWasTouched(with userInfo: [AnyHashable: Any]) {
         responseLabel.text = "touched"
     }
     

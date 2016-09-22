@@ -71,8 +71,8 @@ notification.delegate = self
 ```Swift
 @objc public protocol BSForegroundNotificationDelegate: class, UIApplicationDelegate {
 
-    optional func foregroundRemoteNotificationWasTouched(userInfo: [NSObject: AnyObject])
-    optional func foregroundLocalNotificationWasTouched(localNotifcation: UILocalNotification)
+    optional func foregroundRemoteNotificationWasTouched(with userInfo: [AnyHashable: Any])
+    optional func foregroundLocalNotificationWasTouched(with localNotification: UILocalNotification)
 }
 ```
 
@@ -85,10 +85,10 @@ notification.presentNotification()
 ######If it is needed one of `BSForegroundNotificationDelegate`'s method is called':
 
 ```Swift
-func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void)
-func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void)
+func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], completionHandler: () -> Void)
+func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: () -> Void)
 func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void)
-func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void)
+func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: () -> Void)
 ```
 
 ######Class properties:

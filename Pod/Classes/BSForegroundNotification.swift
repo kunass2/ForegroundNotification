@@ -8,8 +8,8 @@
 
 @objc public protocol BSForegroundNotificationDelegate: class, UIApplicationDelegate {
 
-    @objc optional func foregroundRemoteNotificationWasTouched(userInfo: [NSObject: AnyObject])
-    @objc optional func foregroundLocalNotificationWasTouched(localNotifcation: UILocalNotification)
+    @objc optional func foregroundRemoteNotificationWasTouched(with userInfo: [AnyHashable: Any])
+    @objc optional func foregroundLocalNotificationWasTouched(with localNotification: UILocalNotification)
 }
 
 import UIKit
@@ -40,7 +40,7 @@ open class BSForegroundNotification {
     //MARK: - Initialization
     
     public init(userInfo: [AnyHashable: Any]) {
-        foregroundNotificationView.userInfo = userInfo as [NSObject : AnyObject]?
+        foregroundNotificationView.userInfo = userInfo
     }
     
     public init(localNotification: UILocalNotification) {
@@ -54,7 +54,7 @@ open class BSForegroundNotification {
         foregroundNotificationView.categoryIdentifier = categoryIdentifier
         foregroundNotificationView.soundName = soundName
         
-        foregroundNotificationView.userInfo = userInfo as [NSObject : AnyObject]?
+        foregroundNotificationView.userInfo = userInfo
         foregroundNotificationView.localNotification = localNotification
     }
 
