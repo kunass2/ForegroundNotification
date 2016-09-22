@@ -21,7 +21,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     
     //MARK: - Actions
     
-    @IBAction func notificationWithTextFieldTapped(sender: UIButton) {
+    @IBAction func notificationWithTextFieldTapped(_ sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory("TEXT_FIELD"))
         
@@ -30,7 +30,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
         notification.delegate = self
     }
     
-    @IBAction func notificationWithTwoButtonsTapped(sender: UIButton) {
+    @IBAction func notificationWithTwoButtonsTapped(_ sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory("TWO_BUTTONS"))
         
@@ -39,7 +39,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
         notification.delegate = self
     }
     
-    @IBAction func notificationWithOneButtonTapped(sender: UIButton) {
+    @IBAction func notificationWithOneButtonTapped(_ sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory("ONE_BUTTON"))
         
@@ -48,7 +48,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
         notification.delegate = self
     }
     
-    @IBAction func notificationWithoutActionsTapped(sender: UIButton) {
+    @IBAction func notificationWithoutActionsTapped(_ sender: UIButton) {
         
         let notification = BSForegroundNotification(userInfo: userInfoForCategory(""))
         
@@ -63,7 +63,7 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     
     //MARK: - Private
     
-    private func userInfoForCategory(category: String) -> [NSObject: AnyObject] {
+    fileprivate func userInfoForCategory(_ category: String) -> [AnyHashable: Any] {
         
         return ["aps": [
             "category": category,
@@ -80,16 +80,16 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     
     //MARK: - BSForegroundNotificationDelegate
     
-    func foregroundRemoteNotificationWasTouched(userInfo: [NSObject : AnyObject]) {
+    func foregroundRemoteNotificationWasTouched(userInfo: [NSObject: AnyObject]) {
         responseLabel.text = "touched"
     }
     
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void) {
         responseLabel.text = "action: \(identifier!)"
     }
     
     @available(iOS 9.0, *)
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void) {
         responseLabel.text = "textField: \(responseInfo[UIUserNotificationActionResponseTypedTextKey]!)"
     }
 }

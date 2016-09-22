@@ -10,7 +10,7 @@ import UIKit
 
 extension NSLayoutConstraint {
     
-    override public var description: String {
+    override open var description: String {
         return "id: \(identifier ?? ""), constant: \(constant)"
     }
 }

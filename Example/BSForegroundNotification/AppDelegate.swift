@@ -14,18 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         registerNotifications()
         
         return true
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         print("new thing received")
     }
     
-    private func registerNotifications() {
+    fileprivate func registerNotifications() {
         
         let firstAction = UIMutableUserNotificationAction()
         firstAction.identifier = "first"
@@ -44,24 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         responseTextAction.title = "New text"
         
         if #available(iOS 9.0, *) {
-            responseTextAction.behavior = UIUserNotificationActionBehavior.TextInput
+            responseTextAction.behavior = UIUserNotificationActionBehavior.textInput
         }
         
         let twoButtonsCategory = UIMutableUserNotificationCategory()
         twoButtonsCategory.identifier = "TWO_BUTTONS"
-        twoButtonsCategory.setActions([firstAction, responseTextAction], forContext: .Default)
+        twoButtonsCategory.setActions([firstAction, responseTextAction], for: .default)
         
         let textFieldCategory = UIMutableUserNotificationCategory()
-        textFieldCategory.setActions([responseTextAction], forContext: .Default)
+        textFieldCategory.setActions([responseTextAction], for: .default)
         textFieldCategory.identifier = "TEXT_FIELD"
         
         let oneButtonCategory = UIMutableUserNotificationCategory()
-        oneButtonCategory.setActions([firstAction], forContext: .Default)
+        oneButtonCategory.setActions([firstAction], for: .default)
         oneButtonCategory.identifier = "ONE_BUTTON"
         
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound, .Badge], categories: [twoButtonsCategory, oneButtonCategory, textFieldCategory])
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+        let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: [twoButtonsCategory, oneButtonCategory, textFieldCategory])
+        UIApplication.shared.registerUserNotificationSettings(settings)
+        UIApplication.shared.registerForRemoteNotifications()
     }
 }
 

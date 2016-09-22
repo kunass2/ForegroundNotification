@@ -8,23 +8,23 @@
 
 @objc public protocol BSForegroundNotificationDelegate: class, UIApplicationDelegate {
 
-    optional func foregroundRemoteNotificationWasTouched(userInfo: [NSObject: AnyObject])
-    optional func foregroundLocalNotificationWasTouched(localNotifcation: UILocalNotification)
+    @objc optional func foregroundRemoteNotificationWasTouched(userInfo: [NSObject: AnyObject])
+    @objc optional func foregroundLocalNotificationWasTouched(localNotifcation: UILocalNotification)
 }
 
 import UIKit
 import AVFoundation
 
-public class BSForegroundNotification {
+open class BSForegroundNotification {
     
     private lazy var foregroundNotificationView: BSForegroundNotificationView = {
-        return UINib(nibName: "BSForegroundNotificationView", bundle: NSBundle(forClass: BSForegroundNotificationView.classForCoder())).instantiateWithOwner(nil, options: nil).first as! BSForegroundNotificationView
+        return UINib(nibName: "BSForegroundNotificationView", bundle: Bundle(for: BSForegroundNotificationView.classForCoder())).instantiate(withOwner: nil, options: nil).first as! BSForegroundNotificationView
     }()
     
-    public static var systemSoundID: SystemSoundID = 1001
-    public static var timeToDismissNotification = 4
+    open static var systemSoundID: SystemSoundID = 1001
+    open static var timeToDismissNotification = 4
     
-    public weak var delegate: BSForegroundNotificationDelegate? {
+    open weak var delegate: BSForegroundNotificationDelegate? {
         
         didSet {
             foregroundNotificationView.delegate = delegate
@@ -39,22 +39,22 @@ public class BSForegroundNotification {
     
     //MARK: - Initialization
     
-    public init(userInfo: [NSObject : AnyObject]) {
-        foregroundNotificationView.userInfo = userInfo
+    public init(userInfo: [AnyHashable: Any]) {
+        foregroundNotificationView.userInfo = userInfo as [NSObject : AnyObject]?
     }
     
     public init(localNotification: UILocalNotification) {
         foregroundNotificationView.localNotification = localNotification
     }
     
-    public init(titleLabel: String?, subtitleLabel: String?, categoryIdentifier: String?, soundName: String?, userInfo: [NSObject: AnyObject]?, localNotification: UILocalNotification?) {
+    public init(titleLabel: String?, subtitleLabel: String?, categoryIdentifier: String?, soundName: String?, userInfo: [AnyHashable: Any]?, localNotification: UILocalNotification?) {
         
         foregroundNotificationView.titleLabel.text = titleLabel
         foregroundNotificationView.subtitleLabel.text = subtitleLabel
         foregroundNotificationView.categoryIdentifier = categoryIdentifier
         foregroundNotificationView.soundName = soundName
         
-        foregroundNotificationView.userInfo = userInfo
+        foregroundNotificationView.userInfo = userInfo as [NSObject : AnyObject]?
         foregroundNotificationView.localNotification = localNotification
     }
 
@@ -62,9 +62,9 @@ public class BSForegroundNotification {
     
     //MARK: - Actions
     
-    //MARK: - Public
+    //MARK: - Open
     
-    public func presentNotification() {
+    open func presentNotification() {
         
         foregroundNotificationView.setupNotification()
 
@@ -75,7 +75,7 @@ public class BSForegroundNotification {
         }
     }
     
-    public func dismissView() {
+    open func dismissView() {
         foregroundNotificationView.dismissNotification()
     }
     
