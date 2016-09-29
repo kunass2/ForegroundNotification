@@ -8,9 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = "BSForegroundNotification"
-  s.version          = "1.3"
-  s.summary          = "Present your custom iOS 8 and iOS 9 notification alert when app is in foreground mode."
-  s.description      = "If you need present notification that looks like a native notifaction in iOS 8 or 9 with custom actions including textfield while app is in foreground mode... this framework is for you:-) Simple and straightforward in use."
+  s.version          = "1.6"
+  s.summary          = "Present your custom iOS 10 notification alert when app is in foreground mode."
+  s.description      = "If you need present notification that looks like a native notifaction in iOS 10 with custom actions including textfield while app is in foreground mode... this framework is for you:-) Simple and straightforward in use."
 
   s.homepage         = "https://github.com/kunass2/BSForegroundNotification"
   s.license          = 'MIT'
