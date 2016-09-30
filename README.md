@@ -1,9 +1,11 @@
 # BSForegroundNotification
 
-![Notification with text field action](Assets/1.png)
-![Notification with button actions](Assets/2.png)
-![Notification with button actions](Assets/3.png)
-![Notification without actions](Assets/4.png)
+<img src="Assets/1.png" width="300">
+<img src="Assets/2.png" width="300">
+<img src="Assets/3.png" width="300">
+<img src="Assets/4.png" width="300">
+<img src="Assets/5.png" width="300">
+<img src="Assets/6.png" width="600">
 
 ## Usage
 

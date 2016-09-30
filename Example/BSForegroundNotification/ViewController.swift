@@ -63,12 +63,12 @@ class ViewController: UIViewController, BSForegroundNotificationDelegate {
     
     //MARK: - Private
     
-    fileprivate func userInfoForCategory(_ category: String) -> [AnyHashable: Any] {
+    private func userInfoForCategory(_ category: String) -> [AnyHashable: Any] {
         
         return ["aps": [
             "category": category,
             "alert": [
-                "body": "Hello this is a big body, you can do this if you want. A very nice notification sis for you since now. available on GIthub for free. Is not this beautiful?:-)",
+                "body": "Hello this is a bigbody, you can do this if you want.",
                 "title": "Super notification title"
             ],
             "sound": "sound.wav"

@@ -21,11 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        print("new thing received")
-    }
-    
-    fileprivate func registerNotifications() {
+    private func registerNotifications() {
         
         let firstAction = UIMutableUserNotificationAction()
         firstAction.identifier = "first"
