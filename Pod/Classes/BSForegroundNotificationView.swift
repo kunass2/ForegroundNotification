@@ -143,21 +143,34 @@ class BSForegroundNotificationView: UIView, UITextViewDelegate {
             
             applicationNameLabel.text = (Bundle.main.infoDictionary?["CFBundleName"] as? String)?.uppercased()
             
+            let title: String
+            let subtitle: String
+            let category: String?
+            let sound: String?
             if let payload = userInfo?["aps"] as? [AnyHashable: Any] {
                 
                 if let alertTitle = payload["alert"] as? String {
-                    
-                    titleLabel.text = alertTitle
-                    
+                    title = alertTitle
+                    subtitle = ""
                 } else {
-                    
-                    titleLabel.text = (payload["alert"] as? [AnyHashable: Any])?["title"] as? String ?? ""
-                    subtitleTextView.text = (payload["alert"] as? [AnyHashable: Any])?["body"] as? String ?? ""
+                    let alertDictionary = payload["alert"] as? [AnyHashable: Any]
+                    title = alertDictionary?["title"] as? String ?? ""
+                    subtitle = alertDictionary?["body"] as? String ?? ""
                 }
                 
-                categoryIdentifier = payload["category"] as? String
-                soundName = payload["sound"] as? String
+                category = payload["category"] as? String
+                sound = payload["sound"] as? String
+            } else {
+                title = ""
+                subtitle = ""
+                category = nil
+                sound = nil
             }
+            
+            titleLabel.text = title
+            subtitleTextView.text = subtitle
+            categoryIdentifier = category
+            soundName = sound
         }
     }
     
