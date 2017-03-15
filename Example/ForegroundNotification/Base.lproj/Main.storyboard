@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ForegroundNotification_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="ebI-at-hFf">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkV-Oo-Duc">
+                                <rect key="frame" x="0.0" y="70" width="600" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.93000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0Q8-4U-sKT"/>
+                                </constraints>
+                                <state key="normal" title="Notification with TextField"/>
+                                <connections>
+                                    <action selector="notificationWithTextFieldTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tYx-4c-aDB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdp-sF-E9F">
+                                <rect key="frame" x="0.0" y="130" width="600" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.82000000000000006" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="VE9-5g-jpA"/>
+                                </constraints>
+                                <state key="normal" title="Notification with two buttons (one is textfield)"/>
+                                <connections>
+                                    <action selector="notificationWithTwoButtonsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d0Z-b8-Fch"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LY-Zl-XpL">
+                                <rect key="frame" x="0.0" y="190" width="600" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.64000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="dgM-tF-lVw"/>
+                                </constraints>
+                                <state key="normal" title="Notification with one button"/>
+                                <connections>
+                                    <action selector="notificationWithOneButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nHD-Ge-LX5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNT-Nm-DXY">
+                                <rect key="frame" x="0.0" y="250" width="600" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.57000000000000006" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="pto-Pu-gj4"/>
+                                </constraints>
+                                <state key="normal" title="Notification without actions"/>
+                                <connections>
+                                    <action selector="notificationWithoutActionsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L8O-bC-hhi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cE-BJ-QV7">
+                                <rect key="frame" x="200" y="410" width="200" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="033-dq-zEp"/>
+                                    <constraint firstAttribute="width" constant="200" id="Upa-uK-0Yt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="VNT-Nm-DXY" secondAttribute="trailing" id="Emf-8S-nga"/>
+                            <constraint firstItem="ebI-at-hFf" firstAttribute="top" secondItem="8LY-Zl-XpL" secondAttribute="bottom" id="Etj-gf-tzw"/>
+                            <constraint firstItem="wdp-sF-E9F" firstAttribute="top" secondItem="bkV-Oo-Duc" secondAttribute="bottom" id="F03-dh-TuX"/>
+                            <constraint firstItem="bkV-Oo-Duc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="HxK-56-sjI"/>
+                            <constraint firstAttribute="trailing" secondItem="ebI-at-hFf" secondAttribute="trailing" id="Ihu-a1-w5a"/>
+                            <constraint firstItem="VNT-Nm-DXY" firstAttribute="top" secondItem="8LY-Zl-XpL" secondAttribute="bottom" id="LTF-ah-XXx"/>
+                            <constraint firstItem="8LY-Zl-XpL" firstAttribute="top" secondItem="wdp-sF-E9F" secondAttribute="bottom" id="LhP-wP-GoD"/>
+                            <constraint firstItem="9cE-BJ-QV7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LuW-Oi-q4X"/>
+                            <constraint firstItem="VNT-Nm-DXY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MZ0-1D-LNf"/>
+                            <constraint firstAttribute="trailing" secondItem="wdp-sF-E9F" secondAttribute="trailing" id="Rep-sd-E62"/>
+                            <constraint firstItem="bkV-Oo-Duc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Wea-b0-kXD"/>
+                            <constraint firstItem="ebI-at-hFf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YQZ-d8-QRM"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ebI-at-hFf" secondAttribute="bottom" id="Yw7-RA-g2T"/>
+                            <constraint firstItem="wdp-sF-E9F" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="dp6-J2-PJM"/>
+                            <constraint firstAttribute="trailing" secondItem="bkV-Oo-Duc" secondAttribute="trailing" id="fB5-Je-uWg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wdp-sF-E9F" secondAttribute="trailing" id="gsu-5K-Inj"/>
+                            <constraint firstItem="ebI-at-hFf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="j2o-Ii-hrg"/>
+                            <constraint firstItem="wdp-sF-E9F" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jLQ-pd-VAU"/>
+                            <constraint firstAttribute="trailing" secondItem="8LY-Zl-XpL" secondAttribute="trailing" id="p0n-rd-yqN"/>
+                            <constraint firstItem="8LY-Zl-XpL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sK0-3I-l87"/>
+                            <constraint firstItem="9cE-BJ-QV7" firstAttribute="top" secondItem="VNT-Nm-DXY" secondAttribute="bottom" constant="100" id="vLz-xE-Rpc"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Etj-gf-tzw"/>
+                                <exclude reference="dp6-J2-PJM"/>
+                                <exclude reference="gsu-5K-Inj"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="responseLabel" destination="9cE-BJ-QV7" id="6AM-Bf-ySJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background" width="960" height="600"/>
+    </resources>
+</document>

@@ -1,0 +1,22 @@
+{
+  "name": "ForegroundNotification",
+  "version": "0.1.0",
+  "summary": "A short description of ForegroundNotification.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/kunass2/ForegroundNotification",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "kunass2": "bartlomiej.semanczyk@railwaymen.org"
+  },
+  "source": {
+    "git": "https://github.com/kunass2/ForegroundNotification.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "ForegroundNotification/Classes/**/*"
+}

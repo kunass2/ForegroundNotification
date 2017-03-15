@@ -1,14 +1,16 @@
 PODS:
-  - BSForegroundNotification (0.1.4)
+  - BSForegroundNotification (2.0)
 
 DEPENDENCIES:
   - BSForegroundNotification (from `../`)
 
 EXTERNAL SOURCES:
   BSForegroundNotification:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  BSForegroundNotification: d92a9406036ee5af4152dcf3b89d5e4246da1f46
+  BSForegroundNotification: d8471faf2bf30a16512466509aabe462a6cca8c1
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 3b1ca57ee52e7a1630aac0e1a591ab9904077db2
+
+COCOAPODS: 1.1.1

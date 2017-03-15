@@ -1,11 +1,5 @@
-source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'BSForegroundNotification_Example', :exclusive => true do
-  pod "BSForegroundNotification", :path => "../"
-end
-
-target 'BSForegroundNotification_Tests', :exclusive => true do
-  pod "BSForegroundNotification", :path => "../"
-
+target 'ForegroundNotification_Example' do
+  pod 'BSForegroundNotification', :path => '../'
 end

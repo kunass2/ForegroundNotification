@@ -1,4 +1,4 @@
-# BSForegroundNotification
+# ForegroundNotification
 
 <img src="Assets/1.png" width="300">
 <img src="Assets/2.png" width="300">
@@ -13,7 +13,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-BSForegroundNotification is available through [CocoaPods](http://cocoapods.org). To install
+ForegroundNotification is available through [CocoaPods](http://cocoapods.org/pods/BSForegroundNotification). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
@@ -23,7 +23,7 @@ pod "BSForegroundNotification"
 If you used `use_framework` in your podfile just simply do:
 
 ```Swift
-import BSForegroundNotification
+import ForegroundNotification
 
 ```
 
@@ -32,7 +32,7 @@ for every file when you need to use it.
 you may also use:
 
 ```Swift
-@import BSForegroundNotification
+@import ForegroundNotification
 
 ```
 within **bridging header** file and avoid to import framework for every needed file.
@@ -48,30 +48,31 @@ within **bridging header** file and avoid to import framework for every needed f
 ######Simply create your foreground notification object with on of three ways:
 
 ```Swift
-let notification = BSForegroundNotification(userInfo: userInfo) //remote
-let notification = BSForegroundNotification(localNotification: localNotification) //local
-let notification = BSForegroundNotification(titleLabel: "title", subtitleLabel: "subtitle", categoryIdentifier: "category") //custom initializer
+let notification = ForegroundNotification(userInfo: userInfo) //remote
+let notification = ForegroundNotification(localNotification: localNotification) //local
+let notification = ForegroundNotification(titleLabel: "title", subtitleLabel: "subtitle", categoryIdentifier: "category") //custom initializer
 ```
 
-######Set a default dismissal time for the notification:
+######Set a default static properties:
 
 ```Swift
-notification.timeToDismissNotification = 10 //4 is by default
+ForegroundNotification.timeToDismissNotification = 4
+ForegroundNotification.systemSoundID: SystemSoundID = 1001
 ```
 
 ######Set delegate which conform to protocol `BSForegroundNotificationDelegate`:
 
-Note that `BSForegroundNotificationDelegate` inherits from `UIApplicationsDelegate`
+Note that `ForegroundNotificationDelegate` inherits from `UIApplicationsDelegate`
 
 ```Swift
 notification.delegate = self
 ```
 
-######Implement optional methods of `BSForegroundNotificationDelegate`
+######Implement optional methods of `ForegroundNotificationDelegate`
 
 
 ```Swift
-@objc public protocol BSForegroundNotificationDelegate: class, UIApplicationDelegate {
+@objc public protocol ForegroundNotificationDelegate: class, UIApplicationDelegate {
 
     optional func foregroundRemoteNotificationWasTouched(with userInfo: [AnyHashable: Any])
     optional func foregroundLocalNotificationWasTouched(with localNotification: UILocalNotification)
@@ -84,7 +85,7 @@ notification.delegate = self
 notification.presentNotification()
 ```
 
-######If it is needed one of `BSForegroundNotificationDelegate`'s method is called':
+######If it is needed one of `ForegroundNotificationDelegate`'s method is called':
 
 ```Swift
 func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], completionHandler: () -> Void)
@@ -92,12 +93,6 @@ func application(application: UIApplication, handleActionWithIdentifier identifi
 func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void)
 func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: () -> Void)
 ```
-
-######Class properties:
-
-You can set your own sound using `systemSoundID` class property:
-
-```BSForegroundNotification.systemSoundID = 1002 //1001 is by default```
 
 ## Author
 
