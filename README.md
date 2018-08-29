@@ -23,7 +23,7 @@ pod "BSForegroundNotification"
 If you used `use_framework` in your podfile just simply do:
 
 ```Swift
-import ForegroundNotification
+import BSForegroundNotification
 
 ```
 
@@ -32,7 +32,7 @@ for every file when you need to use it.
 you may also use:
 
 ```Swift
-@import ForegroundNotification
+@import BSForegroundNotification
 
 ```
 within **bridging header** file and avoid to import framework for every needed file.
